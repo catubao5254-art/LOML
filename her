@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LOML(Bebe)</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Georgia", serif;
+      background: linear-gradient(180deg, #f0f8ff, #e6ffe6);
+      overflow-x: hidden;
+    }
+
+    /* Greeting screen */
+    #greeting {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #greeting .top-pictures {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    #greeting .top-pictures img {
+      width: 80px;  /* small square */
+      height: 80px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    }
+
+    #greeting img.main {
+      max-width: 300px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+
+    #greeting h1 {
+      font-size: 2em;
+      color: #2d572c;
+      margin-bottom: 15px;
+    }
+
+    #buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+    }
+
+    button {
+      font-size: 1.2em;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #4caf50;
+      color: white;
+    }
+
+    button.no {
+      background: #d9534f;
+    }
+
+    /* Letter page */
+    #letter {
+      display: none;
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 40px;
+      background: #fff8e7;
+      border: 4px solid #654321;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      animation: fadeIn 2s ease;
+    }
+
+    #letter img {
+      max-width: 250px;
+      margin: 0 auto 20px;
+      display: block;
+      border-radius: 15px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      text-align: center;
+      color: #2d572c;
+      font-size: 2em;
+      margin-bottom: 20px;
+      animation: float 3s infinite ease-in-out;
+    }
+
+    p {
+      line-height: 1.6;
+      font-size: 1.1em;
+      color: #333;
+      text-align: justify;
+      margin-bottom: 15px;
+    }
+
+    .music-button {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 25px;
+      font-size: 1em;
+      background: #1db954;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      transition: background 0.3s ease;
+    }
+
+    .music-button:hover {
+      background: #14833b;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Greeting Section -->
+  <div id="greeting">
+    <!-- 👉 Paste 3 picture links here -->
+    <div class="top-pictures">
+      <img src="https://od.lk/s/MzRfODYxODEyODhf/b138ab96-b327-4b45-919e-e4e86588ba2f.jpg" alt="Pic 1">
+      <img src="https://od.lk/s/MzRfODYxODEyNjNf/7dd6afed-d36a-4907-b844-270ea715116c.jpg" alt="Pic 2">
+      <img src="https://od.lk/s/MzRfODYxODEyNThf/cb217f79-6768-409e-974d-a0db9cbb3492.jpg" alt="Pic 3">
+    </div>
+
+    <img class="main" src="https://od.lk/s/MzRfODYxODMwMDlf/aab0ae71-c6bf-4994-b1bb-691e5b689d00.jpg" alt="Us 🦖">
+    <h1>Hi, mahal 💙 Are you ready for something special?</h1>
+    <div id="buttons">
+      <button class="yes" onclick="showLetter()">Yes 💌</button>
+      <button class="no" onclick="growYes()">No 🙈</button>
+    </div>
+  </div>
+
+  <!-- Letter Section -->
+  <div id="letter">
+    <!-- 👉 Paste another picture link here -->
+    <img src="https://od.lk/s/MzRfODYxODQzODFf/53a1a765-2cc8-4559-bc33-e5a9e3b27810.jpg" alt="Letter Image">
+
+    <h2>Happy 3rd Anniversary, my love 💚</h2>
+    <p>
+      Three years with you, and my heart still races the same way it did the first time I realized I was in love with you hihiiiii    </p>
+ 
+    <!-- Music Section -->
+<div style="text-align: center; margin: 30px 0;">
+  <button id="playMusic">🎵 Click before you read</button>
+  <audio id="bgMusic" src="https://od.lk/s/MzRfODYxODAyNzNf/PALAGI%20-%20TJxKZ%20Version%20%20OFFICIAL%20LYRIC%20VIDEO.mp3"></audio>
+</div>
+
+<script>
+  const music = document.getElementById("bgMusic");
+  const musicBtn = document.getElementById("playMusic");
+
+  musicBtn.addEventListener("click", function() {
+    if (music.paused) {
+      music.play();
+      musicBtn.textContent = "⏸ Pause Music";
+    } else {
+      music.pause();
+      musicBtn.textContent = "🎵 Click before you read";
+    }
+  });
+</script>
+
+<p>
+      Hello, loveeyyy. Twelve days from now po, it will be three years na since the day I stumbled upon the greatest blessing of my life po, you. At hanggang ngayon, nagugulat parin ako and still in awe that what began as a simple meeting, an ordinary moment in time, became one of the most important moment sa buhay ko. When I first met you, I didn't know you were going to be the one who would matter this much (I'm glad you did HEHRHEHEH) peroo, nandito ako. Living proof that sometimes, love writes itself quietly, almost unnoticeably, hanggang sa bigla mo nalang marealize na it changed the whole story ng buhay moo. 
+    </p>
+    
+     <p> Imagine that, love. Just meeting someone and then finding yourself forever captivated. That was you, that is you (KELAN BANG DI NAGING IKAW HAAA 😝😝) From the way you move, to the way you carry yourself, to the way your soul gently but firmly makes its presence known, lahat ng tungkol sayo has its own gravity. I can never take my eyes off you (ALAM MO NA TO EHEHEHEH aysh), not because I am forced to, but because you are a mystery and a miracle at the same time po. You are you. My palagi, my bebe, my mahal, my asawa, my wife, my all, my other half, my love, my everything, my happiness, my safe space. Nasayo na po ang lahat (iniibig kitang tapat, aysh) You are the wish I never even knew how to put into words, pero God gave me anyway. At wala na pong ibang bagay na gusto kong makuha, nothing else I could ever wish for, but you (Status updateeee, she's mine na AWIRIRIRIEI 😌) </p>
+
+    <p> The things I like about you go beyond words po talaga. They are the kind of things you feel but cannot fully explain, and yet I admire you pa rin, because to explain them is to try to capture the wind or measure the ocean (naksss opkurs) </p>
+
+    <p> I love your personality po, the kind and caring heart that never wants conflict, that always reaches for peace. Nakikita ko kung paano mo sino-solve yung problems even when you’re unsure what to do. You stay strong even in uncertainty, holding others together kahit ikaw mismo pagod na. Yung dedication mo to your friends inspires me, how you remind them that they are seen, valued, and never alone. Hindi lang sila, you as well, seen, valued and never alone. Para ka pong tulay (ay sorry ba, di ka tulay, sakin ka talaga 😝) a peacemaker po who knows the importance of bringing hearts together. You connect people po, loveee. Hinahawakan mo sila gently. At kahit yung exhaustion weighs on you, hindi mo sila pinipigilang mahalin. (OH DIBA, ASAWA KO YAN) That’s who you are po. That’s why they cherish you po, dahil you have that rare kind of love that refuses to quit. </p>
+
+   <p> I admire the way you lead your friends, hindi lang with firmness, pero with grace. You guide them to the right path, helping them grow, showing them strength. And if someone’s word would accidentally get in? Continue lang po, I don't think anyone can do it better than you do, mahallll. That's your forte. But what I love most, beyond lahat nang yan, is simply you being you. </P>
+
+    <p> I love the quietness of your presence at events, the way you sit and talk with your friends, the way your laughter bubbles when something amuses you, that kind of smile that carries pure joy (FR, sino ba naman hindi matitinag ng ngiti at tawa nyannn, cutie cutieee) And syempre, opkurs, your smile, it lights up more than a room, it lights up me HEHEHEH. I love the way you look at me seriously sometimes (TAMA NA STAP, DON'T AYSH 😝) those eyes that focus only on me (Ako na talaga ‘to gaiz), making me feel like the whole world pauses for just a moment (wish we could stay in those moments forever AWIEIEIEI) And sa mga moments na yun, iniisip ko: who could have ever thought I would be this BLESSEDDD ACKKKK? To have someone like you, someone who takes care of me, someone who loves me, both a dream and a reality I get to live every day (will get the hang of this opkurs eheheh) </p)
+
+   <p> You are strong, my love, yes you are pooo. Stronger than you realize, but let it not be a reason para hindi ka po humingi ng tulong, hm? I see how you rise even when kahit pagod ka na, how you keep moving forward with faith, trusting that God will handle what your hands cannot. Nakikita ko rin yung doubt in your eyes sometimes, the questions that whisper if you’re doing enough. And for that, yes you are, bebee. But please know, wala kang kailangang patunayan. Sapat ka na. Matagal nang sapat. You don't need to change para lang ma-meet someone else's expectations. Do not chain po your life to the weight of expectations, you follow the truth of your own becoming po. Your worth is not measured by how well you fit into someone else's idea of you. Love, don't break yourself just to be enough for them, kasiii you were already enough the moment you existed. You deserve to walk your own path po, a path chosen and forged mismo ng sarili mong puso. And that path, mahal, is yours, and SYEMPRE SA'TIN AHEHEEH ayshhh. Kahit san mang tayo malead, i’ll be walking right beside you, my loveyy </p>
+
+<p> Alam kong may mga araw na when the weight feels too heavy, your tears fall quietly too po. I know you fidget when you feel nervous, and in those moments, I wish I would’ve been there and took your hand (PERO, I know ayaw mong makita kita na ganun. Idc, love. I’ll wipe those tears for you po). Those moments cut me deeply kasi I never want to see you hurt. Kaya remember this po, you are never a burden. Your feelings matter, and ikaw mismo yung nagmamatter. Don’t ever hide them, and wag na wag mong is-silence yannn. Let them be heard, let them be shared, and let them rest po in God’s hands. Sa lahat poo, you don't have to hold lahat nsng yun together. Kasi mahal, you’re not meant to po. God can, and I can be here tooo </p>
+
+<p> Opoo, we’ve had our own storms, our own trials. Pero look naman po ohhh, we stood through them, hand in hand, and we’re still here, still going, still choosing each other (AWIEEE OO NAAA) You never have to face things alone po, always remember that. You have a wife who loves nothing more than to be your safe place, your listener, your partner. And I do po, my favorite thing in the world is simply listening to you, hearing your laugh, watching your smile, holding your stories. At kahit pa man sa mga maliliit na bagay, your little posts, your random comments, the way you make parinig (HEHDHEHEHEHEHEHE HATDOG ANG CUTE MO 🫶😝), I treasure them all po </p>
+
+<p> Do you know how beautiful you are po? (Alam kong alam mo 😌) You are my muse. I’m the photographer, and you are the masterpiece po na I will never tire of capturing. If you could only see yourself through my eyes, maiintindihan niyo po kung bakit ako endlessly drawn sa’yo. Kung bakit minamahal kita freely, deeply, nang walang kailangang kapalit. </p>
+
+<p> Opkurs I know, pasaway po talaga ako hihi, and hard to understand din at times. My thoughts get tangled, and maybe I overthink more than I should. I thank you po for being there for me lagiiii (SHUCKS KASI ANONG GINAWA KO PARA MAKUHA KITAAAAA? 🙏🥹), pero ngayon, not so much anymore kasi ang tanging iniisip ko nalang, are two thingssss: you, my wife, and the future we’re building together along with baby tabachingchinggg eheeeee. I thank God every day for you po. For letting me meet you. For allowing me to love you (TOTOONG-TOTOO 🙏) You are my greatest blessing po, my answered prayer po, and opkurs my forever </p>
+
+<p> Three years have passed, and I still find myself discovering new things to love about you. Still learning you, still knowing you, and OPKURS DI MAHAHAWALA ‘TOOO, still falling for you all over again 😝😝. And not once have I regretted it po. Being by your side, loving you, cherishing you, dito po, and sayo is where I feel whole, and where I belong </p>
+
+<p> I don’t love you for what you give me, love. I don’t love you for who you try to be. I love you for who you are po, always, the real, unchanging, beautiful you. Every achievement of yours, every effort you’ve made, it’s enough. You are enough. And no matter what happens poo, I’m not going anywhere. Not now, not everrrr. You are a diamond, my love, a rare, hidden gem talagaa. Every word, every adjective, every image I could conjure para lang ma-describe ka, would still fall short po. But still, I try, because you are worth it (you are so so worth it pooio 🥹) </p>
+
+<p> I love you, deeply and endlessly po, Lois Erich B. Rodrin. And I will never regret marrying you, never regret loving you, never regret choosing you po, kasi hanggang sa duloooooo… You are my forever. I love love love love love love youuuu soooooooo muchieeee poooooo!!! Take care of yourself po lagii haaa, otherwise, I'll take care of you nalangggg 😝 </p>
+
+<p> This is from the eyes of your wife, the eyes behind your every success, the witness to your strength, the photographer of your every smile, the keeper of your every moment, Eirene Chara S. Catubao. Here's to forever pooo, loveeee 😝🫶😌 </p>
+
+   <!-- Last photo at the end -->
+  <div style="text-align: center; margin-top: 20px;">
+    <img src="https://od.lk/s/MzRfODYxODQyMTJf/7f0b75bc-d212-41df-b864-06ca028bf51d.jpg" alt="Us 💙" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+  </div>
+</div>
+
+
+<script>
+    function showLetter() {
+      document.getElementById("greeting").style.display = "none";
+      document.getElementById("letter").style.display = "block";
+    }
+
+    function growYes() {
+      let yesBtn = document.querySelector(".yes");
+      let currentSize = window.getComputedStyle(yesBtn).fontSize;
+      let newSize = parseFloat(currentSize) * 1.3; // grow 30%
+      yesBtn.style.fontSize = newSize + "px";
+      yesBtn.style.padding = "15px 30px";
+    }
+
+    function playMusic() {
+      let music = document.getElementById("bg-music");
+      music.play();
+    }
+  </script>
+</body>
+</html>
